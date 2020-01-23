@@ -10,9 +10,6 @@ class App extends Component {
       <div>
         <Home />
       </div>
-      <div>
-        <Footer />
-      </div>
     );
   }
 }

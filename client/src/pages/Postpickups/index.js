@@ -2,24 +2,13 @@ import React, { Component } from "react";
 import Navbar from "../../components/NavBar";
 import axios from "axios";
 import Footer from "../../components/Footer";
-const form_template = {
-    storeName: "",
-    pickUpAddress: "",
-    pickUpCity: "",
-    pickUpState: "",
-    pickUpZip: "",
-    pickUpFloor: "",
-    userName: "",
-    dropOffAddress: "",
-    dropOffCity: "",
-    dropOffState: "",
-    dropOffZip: "",
-    dropOffFloor: "",
-    payOut: "",
-    phoneNumber: "",
-    merchandise: ""
-
-}
+import ClipLoader from "react-spinners/PulseLoader";
+import { css } from "@emotion/core";
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 class Postpickups extends Component {
     state = {
         results: { ...form_template }
@@ -43,6 +32,25 @@ class Postpickups extends Component {
             results: { ...form_template }
         })
     };
+    constructor(props) {
+        super(props);
+        this.state = {
+          loading: true
+        };
+      }
+  
+      componentDidMount() {
+        this.timerHandle = setTimeout(() => this.setState({ loading: false }), 1000); 
+      }
+    
+      componentWillUnmount(){
+        if (this.timerHandle) {
+          clearTimeout(this.timerHandle);
+          this.timerHandle = 0;
+        }
+      }
+          
+         
 
     handleInputChange = event => {
         const {results} = this.state;
@@ -58,6 +66,16 @@ class Postpickups extends Component {
     render() {
         return (
             <div className="postpickupscontainer">
+                <div className="sweet-loading">
+            <ClipLoader
+              size={20}
+              css={override}
+              size={"50px"} this also works
+              color={"#248232"}
+              margin={"10px"}
+              loading={this.state.loading}
+            />
+            </div>
                 <div className="emptydiv"></div>
                 <div className='horizontalline'></div>
                 <Navbar />

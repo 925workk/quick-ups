@@ -4,6 +4,7 @@ import Navbar from "../../components/NavBar";
 import axios from "axios";
 
 
+
 const Availablejobs = () => {
   const [quickUps, setQuickUps] = useState([])
   useEffect (()=>{
